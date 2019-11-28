@@ -55,15 +55,22 @@ const HomeStack = createStackNavigator({
     'Detalle': {
         screen: DetailScreen,
         navigationOptions: () => ({
-            title: `Detalle Stacked`,
+            title: `Detalles`,
             headerBackTitle: null,
+            headerStyle: {
+                backgroundColor: '#111111',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+            },
         }),
     },
 });
 
 const TabNavigator = createBottomTabNavigator({
-    'Inicio': HomeStack,
-    'Ajustes': SettingsScreen
+    'Destacados': HomeStack,
+    'Buscar': SettingsScreen
 },
     {
         defaultNavigationOptions: ({ navigation }) => ({
@@ -71,11 +78,10 @@ const TabNavigator = createBottomTabNavigator({
                 const { routeName } = navigation.state;
                 let IconComponent = Ionicons;
                 let iconName;
-                if (routeName === 'Inicio') {
-                    iconName = `ios-home`;
-                } else if (routeName === 'Ajustes') {
-                    iconName = `ios-options`;
-                    IconComponent = HomeIconWithBadge;
+                if (routeName === 'Destacados') {
+                    iconName = `ios-film`;
+                } else if (routeName === 'Buscar') {
+                    iconName = `ios-search`;
                 }
 
                 // You can return any component that you like here!
@@ -83,8 +89,10 @@ const TabNavigator = createBottomTabNavigator({
             },
         }),
         tabBarOptions: {
-            activeTintColor: 'tan',
+            activeTintColor: 'white',
             inactiveTintColor: 'gray',
+            activeBackgroundColor: '#222222',
+            inactiveBackgroundColor: '#111111'
         },
     });
 
