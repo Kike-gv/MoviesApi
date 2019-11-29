@@ -1,21 +1,19 @@
 import React from 'react';
-import { Text, View, TextInput, StyleSheet, Dimensions } from 'react-native';
+import { Text, View, ScrollView, TextInput, StyleSheet, Dimensions } from 'react-native';
 
-import { connect, useSelector, useDispatch } from 'react-redux';
-import { actualizeInputValue } from '../../redux/actions/InputActions';
 import MovieInput from '../../components/MovieInput';
+import MoviesGrid from '../../components/MoviesGrid';
 
 const { width, height } = Dimensions.get('window');
 
-const SettingsScreen = () => {
-    const actualizeInput = useSelector(state => state.inputState.actualizeInput);
-    const dispatch = useDispatch();
+const SettingsScreen = ({ navigation }) => {
 
     return (
         <View style={styles.settingsScreen}>
-            <MovieInput/>
-            <Text>Prueba de redux hooks</Text>
-            <Text>{actualizeInput}</Text>
+            <MovieInput />
+            <ScrollView>
+                <MoviesGrid navigation={navigation} />
+            </ScrollView>
         </View>
     );
 }
@@ -24,7 +22,9 @@ const styles = StyleSheet.create({
     settingsScreen: {
         minHeight: height,
         backgroundColor: '#111111',
-        padding: 16
+    },
+    tryText: {
+        color: 'white'
     },
 });
 

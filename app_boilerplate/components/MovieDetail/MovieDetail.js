@@ -6,7 +6,7 @@ import MovieApi from '../../services/MovieApi';
 const { width, height } = Dimensions.get('window');
 
 const MovieDetail = ({ movie }) => {
-    const [moviesGenres, setMoviesGenres] = useState(false);
+    const [moviesGenres, setMoviesGenres] = useState([]);
 
 
     const fetchGenres = async () => {
@@ -15,14 +15,19 @@ const MovieDetail = ({ movie }) => {
     }
 
     const changeGenreCodeToWords = (GenresCodes) => {
+        const genreArray = [];
         movie.genre_ids.map(singleGenre => {
             GenresCodes.genres.forEach(element => {
                 if (singleGenre === element.id) {
                     console.log("TCL: changeGenreCodeToWords -> element.name", element.name)
                     // setMoviesGenres(...moviesGenres, element.name);
+                    genreArray.push(element.name);
                 }
             });
         });
+        console.log("TCL: changeGenreCodeToWords -> genreArray", genreArray)
+
+        setMoviesGenres(genreArray);
     }
 
     useEffect(() => {
@@ -45,6 +50,9 @@ const MovieDetail = ({ movie }) => {
             <View style={styles.flexedSpaced}>
                 <Text style={styles.movieDetail_subtitle}>Estreno:</Text>
                 <Text style={styles.movieDetail_subtitle}>{movie.release_date}</Text>
+            </View>
+            <View style={styles.movieDetail_Genres}>
+                {moviesGenres && moviesGenres.map(genre => { return <Text key={genre} style={styles.movieDetail_Genres_Individual}>{genre}</Text> })}
             </View>
             {/* {moviesGenres && moviesGenres.map(genre => { return <Text>{genre}</Text> })} */}
             <Text style={styles.movieDetail_overview}>{movie.overview}</Text>
@@ -79,6 +87,22 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: 'white',
         marginBottom: 6,
+    },
+    movieDetail_Genres: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        marginTop: 8,
+        marginBottom: 11,
+    },
+    movieDetail_Genres_Individual: {
+        marginLeft: 5,
+        backgroundColor: 'rgba(255,255,255,0.6)',
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingTop: 5,
+        paddingBottom: 5,
+        marginBottom:5
     },
     movieDetail_overview: {
         fontSize: 16,

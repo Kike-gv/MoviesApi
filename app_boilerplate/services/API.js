@@ -16,11 +16,12 @@ class API {
     const LANGUAGE = '&language=es-ES';
     let previousHeader;
     let extendedProp;
-    if (discover !== '') { extendedProp = '&' + discover + LANGUAGE; previousHeader = 'discover/movie'; };
 
-    if (search !== '') { extendedProp = '&' + search + LANGUAGE; previousHeader = 'search/movie'; };
+    if (search !== '') { extendedProp = '&query=' + search + LANGUAGE; previousHeader = 'search/movie'; }
 
-    if (find !== '') { extendedProp = '&' + find + LANGUAGE; previousHeader = 'movie/'; };
+    else if (discover !== '') { extendedProp = '&' + discover + LANGUAGE; previousHeader = 'discover/movie'; }
+
+    else if (find !== '') { extendedProp = '&' + find + LANGUAGE; previousHeader = 'movie/'; };
 
     const urlBuild = this.apiBase + previousHeader + this.apiKey + extendedProp;
     console.log("TCL: API -> get -> urlBuild", urlBuild)

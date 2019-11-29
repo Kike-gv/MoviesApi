@@ -11,7 +11,7 @@ const MovieInput = () => {
     return (
         <TextInput
             style={styles.movieInput}
-            placeholder='Escribe algo para que redux lo actualize'
+            placeholder='Busca tu pelicula...'
             onChangeText={(text) => dispatch(actualizeInputValue(text))}
             value={actualizeInput}
         />
@@ -25,7 +25,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         paddingLeft: 16,
         paddingRight: 16,
-        marginTop: 32
+        marginTop: 48,
+        marginBottom: 16,
+        color: 'white',
     },
 });
 

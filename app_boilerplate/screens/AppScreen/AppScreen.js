@@ -68,9 +68,32 @@ const HomeStack = createStackNavigator({
     },
 });
 
+const SearchStack = createStackNavigator({
+    'Buscar': {
+        screen: SettingsScreen,
+        navigationOptions: () => ({
+            headerShown: false,
+        }),
+    },
+    'Detalle': {
+        screen: DetailScreen,
+        navigationOptions: () => ({
+            title: `Detalles`,
+            headerBackTitle: null,
+            headerStyle: {
+                backgroundColor: '#111111',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+            },
+        }),
+    },
+});
+
 const TabNavigator = createBottomTabNavigator({
     'Destacados': HomeStack,
-    'Buscar': SettingsScreen
+    'Buscar': SearchStack
 },
     {
         defaultNavigationOptions: ({ navigation }) => ({
